@@ -2,14 +2,19 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 import models
-
 from database import engine, Base, getDB
+
+
+#import routes here
+from routes.SymptonRoutes import router as SymptomRouter
 
 def init_db():
     Base.metadata.create_all(bind=engine)
     print("Database tables created/verified!")
 
 app = FastAPI(title="Symptom Diagnosis API")
+app.include_router(SymptomRouter, prefix="/api")
+
 
 @app.get("/")
 def root():

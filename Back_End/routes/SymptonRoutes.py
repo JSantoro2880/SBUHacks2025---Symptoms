@@ -5,9 +5,10 @@ from database import engine, Base, getDB
 
 router = APIRouter()
 
-router.post("/add/symptoms")
-def submitSolutions(symptom : pydynamicModels.SymptomEntryCreate, db : Session = Depends(getDB())):
+@router.post("/add/symptoms")
+def submitSolutions(symptom : pydynamicModels.SymptomEntryCreate, db : Session = Depends(getDB)):
 
+    ##add user id when we make login
     symptom_entry = models.SymptomEntry(symptoms_text=symptom.symptoms_text)
     db.add(symptom_entry)
     db.commit()
@@ -20,5 +21,12 @@ def submitSolutions(symptom : pydynamicModels.SymptomEntryCreate, db : Session =
     db.commit()
     db.refresh(diagnosis)
 
-    symptom_entry.diagnosis = diagnosis
+    return symptom_entry
+
+
+@router.get("/symptoms/{id}")
+def getSymptomEntry(id: int, db: Session = Depends(getDB)):
+    symptom_entry = db.query(models.SymptomEntry).filter(models.SymptomEntry.id == id).first()
+    if not symptom_entry:
+        raise HTTPException(status_code=404, detail="Symptom entry not found")
     return symptom_entry
