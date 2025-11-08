@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and secrets
+.env
+venv/
+*.env
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+logs/
+*.out
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Database files
+*.sqlite3
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.bak
+*.tmp
+*.tox/
+.coverage
+
+# FastAPI or related
+*.uvicorn.log
+
+# IDE and editor configs
+*.iml
