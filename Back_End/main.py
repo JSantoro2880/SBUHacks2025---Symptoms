@@ -7,6 +7,7 @@ from database import engine, Base, getDB
 
 #import routes here
 from routes.SymptonRoutes import router as SymptomRouter
+from routes.DiagnosisRoutes import router as DiagnosisRouter
 
 def init_db():
     Base.metadata.create_all(bind=engine)
@@ -14,6 +15,8 @@ def init_db():
 
 app = FastAPI(title="Symptom Diagnosis API")
 app.include_router(SymptomRouter, prefix="/api")
+app.include_router(DiagnosisRouter, prefix="/api")
+
 
 
 @app.get("/")
